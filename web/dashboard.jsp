@@ -52,14 +52,26 @@
                     dangerMode: true
                 }).then((willDelete) => {
                     if (willDelete) {
-                        <%session.removeAttribute("sessionlogin");%>
-                        window.location.href = "login.jsp";
+                        window.location.href = "loginservlet?action=logout";
                     } else {
                         swal("Anda Batal Logout!");
                     }
                 });
             }
         </script>
+        <%
+            if (status != null) {
+                if (status.equalsIgnoreCase("data berhasil dihapus") || status.equalsIgnoreCase("data berhasil disimpan") || status.equalsIgnoreCase("Berhasil Login")) {
+                    out.println("<script type=\"text/javascript\">;");
+                    out.println("swal(\"Good job!\", \"" + status + "\", \"success\");");
+                    out.println("</script>;");
+                } else {
+                    out.println("<script type=\"text/javascript\">;");
+                    out.println("swal(\"GAGAL!\", \"" + status + "\", \"error\");");
+                    out.println("</script>;");
+                }
+            }
+        %>
     </body>
     <%
         }

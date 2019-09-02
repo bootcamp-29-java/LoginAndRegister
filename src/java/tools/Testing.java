@@ -49,8 +49,7 @@ public class Testing {
   
     public static void main(String[] args) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
-        IRegisterLoginDAO ireg =  new RegisterLoginDAO(factory);
-        Account account = ireg.getByEmail("khrisanggara11@gmail.com");
-        System.out.println(account.getToken());
+        IRegisterLoginController ireg =  new RegisterLoginController(factory);
+        System.out.println(ireg.login("Diana12", "Diana123"));
     }
 }

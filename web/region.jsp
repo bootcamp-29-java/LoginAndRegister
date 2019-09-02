@@ -128,24 +128,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="DataTables/js/datatables.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script type="text/javascript">
-            function logout() {
-                swal({
-                    title: "Apakah Anda Yakin?",
-                    text: "Tekan Ok untuk logout!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        <%session.removeAttribute("sessionlogin");%>
-                        window.location.href = "login.jsp";
-                    } else {
-                        swal("Anda Batal Logout!");
-                    }
-                });
-            }
-        </script>
+        
 
         <%
             if (status != null) {

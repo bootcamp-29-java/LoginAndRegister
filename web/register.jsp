@@ -56,7 +56,7 @@
     <body>
         <div class="container">
             <%
-                String status = (String) session.getAttribute("statusRegister");
+                String status = (String) session.getAttribute("status");
                 out.println(status);
             %>
             <div class="absolute-center is-responsive">
@@ -120,6 +120,6 @@
         %>
     </body>
     <%
-        session.removeAttribute("statusRegister");
+        session.removeAttribute("status");
     %>
 </html>

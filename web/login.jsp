@@ -37,6 +37,7 @@
         <div class="container">
             <%
                 String status = (String) session.getAttribute("status");
+//                session.removeAttribute("sessionlogin");
                 out.println(status);
             %>
             <!--Modal-->
@@ -107,7 +108,7 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <%
             if (status != null) {
-                if (status.equalsIgnoreCase("Cek Email Untuk Verifikasi Akun !") || status.equalsIgnoreCase("Email Reset Password Telah Dikirimkan!") || status.equalsIgnoreCase("Password Sudah Dirubah")) {
+                if (status.equalsIgnoreCase("Cek Email Untuk Verifikasi Akun !") || status.equalsIgnoreCase("Email Reset Password Telah Dikirimkan!") || status.equalsIgnoreCase("Password Sudah Dirubah") || status.equalsIgnoreCase("Akun Anda Telah Aktif")) {
                     out.println("<script type=\"text/javascript\">;");
                     out.println("swal(\"Good job!\", \"" + status + "\", \"success\");");
                     out.println("</script>;");
