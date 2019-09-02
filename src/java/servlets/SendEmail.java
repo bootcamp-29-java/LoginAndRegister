@@ -78,18 +78,6 @@ public class SendEmail extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email        = request.getParameter("emailVerif");
-//        Employee employee   = iec.getByEmail(email);
-//        String subject      = "Reset Password Akun ";
-//        String link         = "http://localhost:8084/JavaWebProject/verifikasi?action=resetpassword&&v="+employee.getId()+"";
-//        String meesage      = "Silahkan klik link berikut untuk mereset password anda :"+link;
-//        if (employee.getId() != null) {
-//            sendEmail.send("wahyusukses28@gmail.com", "sartim solikah", email, subject, meesage);
-//            request.getSession().setAttribute("status", "Email Reset Password Telah Dikirimkan!");
-//            response.sendRedirect("login.jsp");
-//        }else{
-//            request.getSession().setAttribute("status", "Email Anda Tidak Terdaftar!");
-//            response.sendRedirect("login.jsp");            
-//        }
         Account account = iec.getByEmail(email);
         if (account !=null) {
             iec.sendForgotPassword(account.getToken(), email);
