@@ -30,9 +30,10 @@
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.jsp">HOME</a></li>
+                        <li><a href="dashboard.jsp">HOME</a></li>
                         <li><a href="region.jsp">REGION</a></li>
                         <li><a href="country.jsp">COUNTRY</a></li>
+                        <li class="nav-item active"><button class="btn btn-danger" onClick="logout()">LOGOUT</button></li>
                     </ul>
                 </div>
             </div>

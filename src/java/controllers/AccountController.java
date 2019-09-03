@@ -21,6 +21,7 @@ import models.Account;
 import models.Employee;
 import org.hibernate.SessionFactory;
 import tools.BCrypt;
+import tools.Token;
 
 /**
  *
@@ -55,9 +56,8 @@ public class AccountController implements IAccountController{
     @Override
     public String register(String id, String username, String password, String status,String email) {
          String result = "";
-
-        int random = 100000 + new Random().nextInt(1000000);
-        String token = String.valueOf(random);
+//         Token token = new Token();
+        String token = Token.generateToken();
 
         Account account = new Account();
         Employee employee = new Employee();
@@ -75,7 +75,7 @@ public class AccountController implements IAccountController{
             result = "Ooops Kesalahan";
         }
         
-        send(email, token);
+        send(email, token,username);
         
         return result;
     }
@@ -123,7 +123,7 @@ public class AccountController implements IAccountController{
     }
 
     @Override
-    public void send(String to, String token) {
+    public void send(String to, String token, String username) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -139,7 +139,7 @@ public class AccountController implements IAccountController{
         try {
             MimeMessage message = new MimeMessage(session);
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-            message.setSubject("Verikasi Email");
+            message.setSubject("Verifikasi Akun "+username);
             message.setText("Silahkan klik disini untuk memverifikasi akun http://localhost:8084/JavaWebProject/registerservlet?v="+token);
             Transport.send(message);
             System.out.println("message sent successfully");
@@ -147,5 +147,6 @@ public class AccountController implements IAccountController{
             throw new RuntimeException(e);
         }
     }
+
     
 }

@@ -21,6 +21,7 @@ import org.hibernate.SessionFactory;
 import tools.HibernateUtil;
 import tools.VerifyRecaptcha;
 import icontrollers.IRegisterLoginController;
+import models.Account;
 
 /**
  *
@@ -64,12 +65,18 @@ public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String token = request.getParameter("v");
-        status = ireg.updateAccountStatus(token);
-        if (status.equals("Akun Anda Telah Aktif")) {
-            request.getSession().setAttribute("status", status);
-            response.sendRedirect("login.jsp");
-        }else{
-            response.sendRedirect("register.jsp");
+        Account account = ireg.getByToken(token);
+        if (account == null) {
+                request.getSession().setAttribute("status", "Link Sudah Digunakan");
+                response.sendRedirect("login.jsp");
+        } else {
+            status = ireg.updateAccountStatus(token);
+            if (status.equals("Akun Anda Telah Aktif")) {
+                request.getSession().setAttribute("status", status);
+                response.sendRedirect("login.jsp");
+            } else {
+                response.sendRedirect("register.jsp");
+            }
         }
         processRequest(request, response);
     }
@@ -90,10 +97,10 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
-        
+
         boolean verify = VerifyRecaptcha.verify(gRecaptchaResponse);
         if (iac.cekEmail(employeeId, email) && verify) {
-            status = iac.register(employeeId, username, password, "Belum Aktif",email);
+            status = iac.register(employeeId, username, password, "Belum Aktif", email);
             request.getSession().setAttribute("status", status);
 //            iac.send(email);
             response.sendRedirect("login.jsp");

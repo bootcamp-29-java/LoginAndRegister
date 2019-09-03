@@ -19,5 +19,5 @@ public interface IAccountController {
     public String updatePassword(String password,String username);
     public Account getById(String id);
     public boolean cekEmail(String id, String email);
-    public void send(String to, String token);
+    public void send(String to, String token, String username);
 }

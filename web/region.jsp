@@ -18,15 +18,15 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active"><a href="index.jsp" class="nav-link">HOME</a></li>
-                    <li class="nav-item active"><a href="region.jsp" class="nav-link">REGION</a></li>
+                    <li class="nav-item active"><a href="dashboard.jsp" class="nav-link">HOME</a></li>
+                    <li class="nav-item active"><a href="#" class="nav-link">REGION</a></li>
                     <li class="nav-item active"><a href="country.jsp" class="nav-link">COUNTRY</a></li>
                     <li class="nav-item active"><button class="btn btn-danger" onClick="logout()">LOGOUT</button></li>
                 </ul>
@@ -35,7 +35,6 @@
         </br>
         </br>
         </br>
-        <div class="container">
             <!--Initialize-->
             <%
 
@@ -52,6 +51,7 @@
                     else {
             %>
             <!--End of Initialize-->
+        <div class="container">
             <div class="starter-template">
                 <div style="margin-left: 1080px">
                     <button type="button" class="btn btn-primary" onclick="getData('', '')" data-toggle="modal" data-target="#myModal">ADD</button>
@@ -176,6 +176,23 @@
                     }
                 });
             }
+        </script>
+        <script type="text/javascript">
+                            function logout() {
+                                swal({
+                                    title: "Apakah Anda Yakin?",
+                                    text: "Tekan Ok untuk logout!",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true
+                                }).then((willDelete) => {
+                                    if (willDelete) {
+                                        window.location.href = "loginservlet?action=logout";
+                                    } else {
+                                        swal("Anda Batal Logout!");
+                                    }
+                                });
+                            }
         </script>
 
     </body>

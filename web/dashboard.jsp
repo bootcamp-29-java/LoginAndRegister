@@ -5,26 +5,33 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%
+    response.setHeader("Cache-Control", "no-cache");
+    response.setHeader("Cache-Control", "no-store");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
     String status = (String) session.getAttribute("status");
     String username = (String) session.getAttribute("sessionlogin");
-    out.println(status + "  ->" + username);
+    response.setHeader("Cache-Control", "no-cache"); //HTTP 1.1 
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0 
+    response.setDateHeader("Expires", 0);
+//    out.println(status + "  ->" + username);
     if (username == null) {
         out.println("<script>alert(\"Anda Harus Login Terlebih Dulu!\")</script>");
         out.println("<script>window.location.replace(\"login.jsp\");</script>");
     } else {
 %>
-<!DOCTYPE html>
 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,25 +46,25 @@
             </div>
         </nav>
         <h1>Hello World!</h1>
-        
-        
-     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script type="text/javascript">
-            function logout() {
-                swal({
-                    title: "Apakah Anda Yakin?",
-                    text: "Tekan Ok untuk logout!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true
-                }).then((willDelete) => {
-                    if (willDelete) {
-                        window.location.href = "loginservlet?action=logout";
-                    } else {
-                        swal("Anda Batal Logout!");
-                    }
-                });
-            }
+
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script type="text/javascript">
+                        function logout() {
+                            swal({
+                                title: "Apakah Anda Yakin?",
+                                text: "Tekan Ok untuk logout!",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true
+                            }).then((willDelete) => {
+                                if (willDelete) {
+                                    window.location.href = "loginservlet?action=logout";
+                                } else {
+                                    swal("Anda Batal Logout!");
+                                }
+                            });
+                        }
         </script>
         <%
             if (status != null) {
@@ -75,6 +82,7 @@
     </body>
     <%
         }
+
         session.removeAttribute("status");
     %>
 </html>

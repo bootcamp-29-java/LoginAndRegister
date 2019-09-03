@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,8 +38,10 @@
         <div class="container">
             <%
                 String status = (String) session.getAttribute("status");
-//                session.removeAttribute("sessionlogin");
-                out.println(status);
+                String username = (String) session.getAttribute("sessionlogin");
+                if (username != null) {
+                    response.sendRedirect("dashboard.jsp");
+                } else {
             %>
             <!--Modal-->
             <div id="myModal" class="modal fade" role="dialog">
@@ -121,6 +124,7 @@
         %>
     </body>
     <%
+        }
         session.removeAttribute("status");
     %>
 </html>

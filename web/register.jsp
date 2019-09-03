@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <div class="form-group">
-                                        <input type="text" minlength="6" id="username" name="username" class="form-control" name='username' placeholder="Username" pattern="^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$" required/>          
+                                        <input type="text" minlength="6" id="username" name="username" class="form-control" name='username' placeholder="Username" pattern="^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]+$" oninvalid="this.setCustomValidity('Username Harus Kombinasi Huruf Besar, Huruf kecil dan Angka')" oninput="setCustomValidity('')"  required/>          
                                     </div>
                                 </div>
                                 <div class="col-md-12">

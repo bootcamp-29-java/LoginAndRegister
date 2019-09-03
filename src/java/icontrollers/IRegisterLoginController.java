@@ -17,5 +17,5 @@ public interface IRegisterLoginController {
     public Account getByEmail(String email);
     public String updatePassword(String token, String password);
     public String login(String username, String password);
-    public String lockAccount(String username);
+    public Account getByToken(String token);
 }
